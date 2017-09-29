@@ -1,10 +1,11 @@
 <# Adjust default variables if needed#>
 
-#Path
-$_TemplateRepository="C:\MyTemplates"
+#Paths
+$_TemplateRepository= join-path "$_ScriptPath" -childpath "Templates"
+$_FunctionRepository=join-path "$_ScriptPath" -childpath "Functions"
 
 #Email
-$_SMTPServer="smtpinterne.groupe.sa.colas.com"
+$_SMTPServer="smtp.domain.com"
 $_enc=[system.text.encoding]::UTF8 # encoding for mail
 
 #EventLog
