@@ -90,7 +90,7 @@ try{
 #>`n`n`n
 "@
     
-    $TemplateContent |Out-File $TemplatePath 
+    $TemplateContent |Out-File $TemplatePath
     $ParamBlock= # Give sample parameters to scripters
     @'
 [CmdletBinding()] #make script react as cmdlet (-verbose etc..)
@@ -164,8 +164,7 @@ $ScriptBody+=@'
     }
 }
 
-# !!! PRIVATE VARIABLES DON'T TOUCH !!!
-###################
+# PRIVATE VARIABLES DON'T TOUCH !
 $_ScriptFullName=$MyInvocation.myCommand.definition
 $_ScriptName=Split-Path -Leaf $_ScriptFullName
 $_ScriptPath=split-path -Parent   $_ScriptFullName
