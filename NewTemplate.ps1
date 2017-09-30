@@ -160,7 +160,7 @@ $ScriptBody+=@'
     # Ref: http://msdn.microsoft.com/en-us/library/system.diagnostics.eventlog.sourceexists(v=vs.110).aspx
 
     if (! ([System.Diagnostics.EventLog]::SourceExists($EventSource))){
-        NewEventLog -LogName application -Source "$EventSource"
+        New-EventLog -LogName application -Source "$EventSource"
     }
 }
 
@@ -196,21 +196,20 @@ catch{
     
     # EVENTLOG
     if ($EventLogAlert){
-        $msg="New message from $(whoami) invoked from $($MyInvocation.ScriptName) :`n"+$message+"`n"+$($_.Exception.Message)+"`n"+$($_.ScriptStackTrace |out-string)
+        $msg="New message from $(whoami) invoked from $_ScriptFullName :`nError:`n"+$($_.Exception.Message)+"`n"+$($_.ScriptStackTrace |out-string)
         # Create event in application eventlog
         Write-EventLog application -EntryType error -Source $EventSource -eventID 1 -Message $msg
     }
     Log "Error, script did not terminate normaly"
-    return 1
+    exit 1
 }
 
-finally{
-    log "Success script ended normally"
-    if ($EventLogAlert){
-        Write-EventLog application -EntryType Information -Source $EventSource -eventID 0 -Message "Success Script ended normally"
-    }  
-}
-return 0
+log "Success script ended normally`n******************************************"
+if ($EventLogAlert){
+    Write-EventLog application -EntryType Information -Source $EventSource -eventID 0 -Message "Success Script ended normally"
+}  
+
+exit 0
 '@    
 
     $scriptBody |Out-File $TemplatePath -Append
