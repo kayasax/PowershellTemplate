@@ -163,6 +163,24 @@ $ScriptBody+=@'
         New-EventLog -LogName application -Source "$EventSource"
     }
 }
+$_SMTPServer='
+'@
+
+$ScriptBody+=@"
+$_SMTPServer
+"@
+
+$scriptBody+=@'
+'
+$_Enc=
+'@
+
+$ScriptBody+=@"
+$_enc
+"@
+
+$scriptBody+=@'
+
 
 # PRIVATE VARIABLES DON'T TOUCH !
 $_ScriptFullName=$MyInvocation.myCommand.definition
@@ -190,7 +208,7 @@ catch{
     # MAIL
     if ($EmailAlert){
         
-        $from="$_HostFQDN" # sender
+        $from="$_HostFQDN"+"@localhost" # sender
         send-mailmessage -SmtpServer $_SMTPServer  -encoding $_enc -subject $message -bodyasHTML  "$($_.Exception.message )<br/><br/> $($_.ScriptStackTrace) " -to $to -from $from #-attachments $logdir\trace2.txt
     }
     
