@@ -33,3 +33,5 @@ You can also set *$EventLogAlert* tp `$true` to create an event log which will p
 You can use the provided log function to record message on file and screen with basic colour highlights
 ![log to screen](https://user-images.githubusercontent.com/1241767/31054109-d2442e52-a6ab-11e7-96ed-c4e77f4c98b6.png)  
 ![log to file](https://user-images.githubusercontent.com/1241767/31054110-d56ecce0-a6ab-11e7-92f6-1d975779c224.png)
+
+The log function include a rotating system : you can specify a maxsize for logfile if logfile exceed this limit it will be rename and a new file will be created. You can specify how much old files you want to keep
