@@ -29,3 +29,7 @@ The mail will look like this
 You can also set *$EventLogAlert* tp `$true` to create an event log which will produce something similar in application event log
 ![eventlog alert](https://user-images.githubusercontent.com/1241767/31054010-649bdb22-a6a9-11e7-8882-78a6ff072271.png)
 
+###### Logging feature
+You can use the provided log function to record message on file and screen with basic colour highlights
+![log to screen](https://user-images.githubusercontent.com/1241767/31054109-d2442e52-a6ab-11e7-96ed-c4e77f4c98b6.png)  
+![log to file](https://user-images.githubusercontent.com/1241767/31054110-d56ecce0-a6ab-11e7-92f6-1d975779c224.png)
