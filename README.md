@@ -25,9 +25,7 @@ This means every error encountered will be a terminated error and the instructio
 By setting *$EmailAlert* to `$true` an email will be sent when an error occured.
 The mail will look like this  
 ![Email alert sample](https://user-images.githubusercontent.com/1241767/31053970-a5038382-a6a8-11e7-8e63-c8f120f4252f.png)
-<<<<<<< HEAD
 
 You can also set *$EventLogAlert* tp `$true` to create an event log which will produce something similar in application event log
 ![eventlog alert](https://user-images.githubusercontent.com/1241767/31054010-649bdb22-a6a9-11e7-8882-78a6ff072271.png)
-=======
->>>>>>> 614bc2192da6e2f6f044703a1d5f3f1a50ca0a94
+
