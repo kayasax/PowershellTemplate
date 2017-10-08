@@ -90,11 +90,42 @@ try{
                 Throw "Error could $function was not found "
             }
             
-            $output =$indent + [string]::Join("`n",( get-content  "$function")) -replace "`n","`n $indent"   #copy function content and maintain indentation
-            write-verbose "$output"
+            $content=get-content  "$function"
+           # $matches = $null
+            $content |%{
+                $line=$_
+                if($_ -match '<%(.*)%>'){ #replace variable placeholder with actual value
+                    $tag=$Matches[0]
+                    Write-Verbose "found variable placeholder: $tag"
+                    $variablename=$matches[1] -replace '^\$','' #remove $ char so we can use it in get-variable
+                    Write-Verbose "variablename: $variablename"
+                    [string]$newvalue = get-variable $variablename |select -ExpandProperty value
+                    if($newvalue.ToLower() -eq "true"){
+                        $newvalue=1
+                    }
+                    if($newvalue.ToLower() -match "false"){
+                        $newvalue=0
+                    }
+
+                    Write-Verbose "new-value: $newvalue"
+                    $newline=$_ -replace [regex]::escape($tag) , $newvalue
+                   
+                }
+                else{
+
+                    $newline=$_
+                }
+                
+                $newcontent+="$newline`n"
+            }
+            #remove the last new line
+            $newcontent[-1] -replace '`n',''
+            $output =$indent + [string]::Join("`n", $newcontent) -replace "`n","`n$indent"   #copy function content and maintain indentation
+            $newcontent=""
+            #write-verbose "$output"
         } 
         else { 
-            $output = $_
+            $output="$_"
         }
         $output | Out-File $OutputPath -Append -Encoding utf8 
     } # End of template parsing
