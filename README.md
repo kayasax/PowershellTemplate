@@ -7,14 +7,15 @@ An attempt to create a templating system for powershell.
 - Ease the reuse of existing functions without copy/paste code extracts
 
 ###### The workflow for creating a new script will be:
-1. Create a new template in template repository  
+1. Edit preferences.ps1 to define your default values (should be done once)
+2. Create a new template in template repository  
   `PS> Newtemplate.ps1 -name MyTemplate`  
   This will create MyTemplate.ps1t in the repository (defined in *preferences.ps1*)
-2. Edit error handling preferences and insert your code in the previously generated template  
+3. Edit error handling preferences and insert your code in the previously generated template  
   You can use the `<include>` tag to reuse existing code from the function repository  
   eg: `<include logging/log>`  
   The content of the file *log.ps1* found in the *logging* directory of the function repo will be inserted here at step 3
-3. Generate the script  
+4. Generate the script  
   `PS>NewScriptFromTemplate.ps1 -template MyTemplate -name MyScript.ps1`  
   will create MyScript.ps1 in the current directory
 
