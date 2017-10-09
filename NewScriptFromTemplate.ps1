@@ -99,12 +99,9 @@ try{
                     Write-Verbose "found variable placeholder: $tag"
                     $variablename=$matches[1] -replace '^\$','' #remove $ char so we can use it in get-variable
                     Write-Verbose "variablename: $variablename"
-                    [string]$newvalue = get-variable $variablename |select -ExpandProperty value
-                    if($newvalue.ToLower() -eq "true"){
-                        $newvalue=1
-                    }
-                    if($newvalue.ToLower() -match "false"){
-                        $newvalue=0
+                    $newvalue = get-variable $variablename -ValueOnly
+                    if ($newvalue -is [bool]) {
+                        $newvalue = "`$$newvalue"
                     }
 
                     Write-Verbose "new-value: $newvalue"
